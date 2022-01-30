@@ -89,6 +89,7 @@ public class demoTransaction{
 		UserTransaction userTransaction = null;
 		Connection conn = createDB();
 		try {
+			userTransaction = getUserTransaction();
 			userTransaction.begin();
 		} catch (NotSupportedException e) {
 			// TODO Auto-generated catch block
