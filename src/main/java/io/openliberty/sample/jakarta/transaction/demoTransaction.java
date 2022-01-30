@@ -124,7 +124,7 @@ public class demoTransaction{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			System.out.println("调用异常！");				
+			System.out.println("error");				
 		}
 	}
 }
