@@ -144,17 +144,10 @@ public class demoTransaction{
 		
 		Connection conn = setupJDBCConnection();
 		UserTransaction userTransaction = setupUserTransaction();
-//		updateDB(conn, "CREATE DATABASE jdbc_db"); // Create the DB if not yet there.
+		updateDB(conn, "CREATE DATABASE jdbc_db"); // Create the DB if not yet there.
 		
 		try {
 			userTransaction.begin();
-		} catch (NotSupportedException e) { 
-			e.printStackTrace();
-		} catch (SystemException e) {
-			e.printStackTrace();
-		}
-		
-		try {
 			
 			String sql = "INSERT INTO jdbc_db " + "VALUES (100, 18)";
 			updateDB(conn, sql);
@@ -164,19 +157,16 @@ public class demoTransaction{
 
 			userTransaction.commit();
 			
-		} catch(Exception e){
-			e.printStackTrace();
+			conn.close();
 			
+		} catch (Exception e) { 
+			e.printStackTrace();
 			try {
-				userTransaction.rollback();
-			} catch (IllegalStateException | SecurityException | SystemException e1) {
+				conn.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-					
-		}
-		
-		try {
-			conn.close();
-		} catch (SQLException e) { e.printStackTrace(); }
+		} 
 	}
 }
